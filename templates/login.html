@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <title>W3.CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
@@ -8,12 +10,17 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
 h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
-body {font-family: "Open Sans";
+body {font-family:'Josefin Sans', sans-serif;;
 background-image: url('static/roses.jpg'); 
-background-size: cover;}
+background-size: cover;
+opacity: 0.8}
 w3-navbar{opacity: 0.7;
 }
+form{border: 3px solid #f1f1f1;
+background-color: white;
+background: rgba(255,255,255,0.8)}
 
 </style>
 <body class="w3-light-grey">
@@ -35,17 +42,23 @@ and is wrapped around the whole page content, except for the footer in this exam
     <h6> <span class="w3-tag"> THE INSPIRATION FOR YOUR DAILY OUTFIT</span> </h6>
 
   </header>
-  <div align="center">
-<form action="{{ url_for('login') }}" method = 'post' enctype=multipart/form-data>
+<div align="center">
+  <br><br><br>
+<form action="{{ url_for('login') }}" method = 'post' enctype=multipart/form-data style="width:400px;">
+  
+  <h1 class="w3-xlarge"><b>SIGN IN</b></h1>
+  <br>
+
   
 Email Address:<br>
   <input type="text" name="email"><br>
   Password:<br>
   <input type="password" name="password">
    <input type="submit" value="Login">
-</form>
+
 
 
 <p> Don't have an account? Create one <a href={{url_for('newUser')}}>Here</a></p>
+</form>
   </div>
         </div>

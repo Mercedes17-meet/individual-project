@@ -1,32 +1,48 @@
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+<!DOCTYPE html>
+<html lang="en">
+<title>W3.CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
 
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+body {font-family:'Josefin Sans', sans-serif;;
+background-image: url('static/roses.jpg'); 
+background-size: cover;
+opacity: 0.8}
+w3-navbar{opacity: 0.7;
+}
+form{border: 3px solid #f1f1f1;
+background-color: white;
+background: rgba(255,255,255,0.8)}
 
+</style>
+<body class="w3-light-grey">
 
-<div class="container">
-    <div align="center" class="row panel panel-primary">
-      <form action="{{ url_for('newUser') }}" method = 'post'>
-     Name:<br>
-  <input type="text" name="name"><br>
-  Email Address:<br>
-  <input type="text" name="email"><br>
+<!-- Navigation bar with social media icons -->
+<ul class="w3-navbar w3-black w3-hide-small ">
 
-  Password:<br>
-  <input type="password" name="password"><br>
-  <input type="radio" name="gender" value="male"> Male
-  <input type="radio" name="gender" value="female"> Female<br>
-  Date of birth:
-  <input type="date" name="date_of_birth">
-  <!--<input type=file name=profile_picture ><br><br>-->
-  <input type="submit"  class="btn btn-info btn-block" value="Create Account" >
-</form>
+<li><a href="{{url_for('login')}}"><h6  class="main-nav-item"">MAIN PAGE</h6></a></li>
+<li>   <a href="{{url_for('newUser')}}"><h6  class="main-nav-item"">SIGN UP</h6></a>   </li>
+</ul>
+  
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1600px">
 
-    </div>
+  <!-- Header -->
+  <header class="w3-container w3-center w3-padding-40 w3-white">
+    <h1 class="w3-xxxlarge"><b>ABOUT ME</b></h1>
+    <h6> <span class="w3-tag"> Mercedes Voscoboinik</span> </h6>
+
+  </header>
+<div align="center">
+ 
   </div>
+        </div>

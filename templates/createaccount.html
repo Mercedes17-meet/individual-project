@@ -1,39 +1,78 @@
-<div class="container">
-		<div align="center" class="row">
-			<div align="center" class="panel panel-primary">
-				<div align="center"class="panel-body">
-					<form method="POST" action="#" role="form">
-						<div class="form-group">
-							<h2>Create account</h2>
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="signupName">Your name</label>
-							<input id="signupName" type="text" maxlength="50" class="form-control">
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="signupEmail">Email</label>
-							<input id="signupEmail" type="email" maxlength="50" class="form-control">
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="signupEmailagain">Email again</label>
-							<input id="signupEmailagain" type="email" maxlength="50" class="form-control">
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="signupPassword">Password</label>
-							<input id="signupPassword" type="password" maxlength="25" class="form-control"  length="40">
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="signupPasswordagain">Password again</label>
-							<input id="signupPasswordagain" type="password" maxlength="25" class="form-control">
-						</div>
-						<div class="form-group">
-							<button id="signupSubmit" type="submit" class="btn btn-info btn-block">Create your account</button>
-						</div>
-						
-						<hr>
-						<p></p>Already have an account? <a href="{{url_for('login')}}">Sign in</a></p>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+<html>
+<style>
+form {
+    border: 3px solid #f1f1f1;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #F6CEEC;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+</style>
+<body>
+
+<form action="action_page.php" style="width:400px;" >
+ 
+  <div class="container" align="center">
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
+    <button type="submit">Login</button>
+   
+</form>
+
+</body>
+</html>
