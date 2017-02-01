@@ -1,0 +1,39 @@
+<div class="container">
+		<div align="center" class="row">
+			<div align="center" class="panel panel-primary">
+				<div align="center"class="panel-body">
+					<form method="POST" action="#" role="form">
+						<div class="form-group">
+							<h2>Create account</h2>
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="signupName">Your name</label>
+							<input id="signupName" type="text" maxlength="50" class="form-control">
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="signupEmail">Email</label>
+							<input id="signupEmail" type="email" maxlength="50" class="form-control">
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="signupEmailagain">Email again</label>
+							<input id="signupEmailagain" type="email" maxlength="50" class="form-control">
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="signupPassword">Password</label>
+							<input id="signupPassword" type="password" maxlength="25" class="form-control"  length="40">
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="signupPasswordagain">Password again</label>
+							<input id="signupPasswordagain" type="password" maxlength="25" class="form-control">
+						</div>
+						<div class="form-group">
+							<button id="signupSubmit" type="submit" class="btn btn-info btn-block">Create your account</button>
+						</div>
+						
+						<hr>
+						<p></p>Already have an account? <a href="{{url_for('login')}}">Sign in</a></p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

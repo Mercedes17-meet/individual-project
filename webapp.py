@@ -29,7 +29,7 @@ def inventory():
 	for item in productInventory:
 		htmlString += "<p>" + item.name + "</p> <p>" + item.description + "</p> <p>" + item.price + "</p> <br> <br>"
 	return htmlString
-
+'''
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
 	if request.method == 'GET':
@@ -41,17 +41,19 @@ def login():
 			flash('Missing Arguments')
 			return redirect(url_for('url'))
 		if verify_password(email,password):
-			customer = session.query(Customer).filter_by(email=email).one()
-			flash('Login Successful, welcome %s' % customer.name)
-			login_session['name'] = customer.name
-			login_session['email'] = customer.email
-			login_session['id'] = customer.id
-			return redirect(url_for('inventory'))
+			customer = session.query(User).filter_by(email=email).one()
+			flash('Login Successful, welcome %s' % user.name)
+			login_session['name'] = user.name
+			login_session['email'] = user.email
+			login_session['id'] = user.id
+			return redirect(url_for('login')) #take me to main page
 		else:
 			flash('Incorrect username/email combination')
 			return redirect(url_for('login'))
+@app.route('/aboutUs')
+def aboutUs():
+	return render_template('aboutUs.html')
 
-'''
 
 @app.route('/newUser', methods = ['GET','POST'])
 def newUser():
@@ -75,7 +77,7 @@ def newUser():
         
         session.commit()
         flash("User Created Successfully!")
-        return redirect(url_for('newUser'))
+        return redirect(url_for('newUser')) #take me to main page
     else:
         return render_template('newUser.html')
 
