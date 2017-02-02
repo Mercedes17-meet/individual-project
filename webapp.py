@@ -19,7 +19,7 @@ def verify_password(email, password):
 		return False
 	return True
 
-@app.route('/')
+
 @app.route('/inventory')
 def inventory():
 	items = session.query(Product).all()
@@ -30,6 +30,7 @@ def inventory():
 		htmlString += "<p>" + item.name + "</p> <p>" + item.description + "</p> <p>" + item.price + "</p> <br> <br>"
 	return htmlString
 '''
+@app.route('/')
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
 	if request.method == 'GET':
