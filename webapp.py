@@ -12,14 +12,14 @@ Base.metadata.bind = engine
 Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine, autoflush=False)
 session = DBSession()
-'''
+
 def verify_password(email, password):
-	customer = session.query(Customer).filter_by(email=email).first()
+	customer = session.query(User).filter_by(email=email).first()
 	if not customer or not customer.verify_password(password):
 		return False
 	return True
 
-
+'''
 @app.route('/inventory')
 def inventory():
 	items = session.query(Product).all()
@@ -82,6 +82,7 @@ def newUser():
         flash("User Created Successfully!")
         return redirect(url_for('newUser')) #take me to main page
     else:
+    	
         return render_template('newUser.html')
 
 @app.route("/product/<int:product_id>")

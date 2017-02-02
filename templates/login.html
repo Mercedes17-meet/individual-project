@@ -51,7 +51,15 @@ and is wrapped around the whole page content, except for the footer in this exam
   
   <h1 class="w3-xlarge"><b>SIGN IN</b></h1>
   <br>
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
   
 Email Address:<br>
   <input type="text" name="email"><br>
