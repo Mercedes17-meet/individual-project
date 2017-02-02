@@ -54,7 +54,9 @@ def login():
 @app.route('/aboutUs')
 def aboutUs():
 	return render_template('aboutUs.html')
-
+#@app.route('/user/<string:name>')
+#def profile():
+#	return render_template('profile.html')
 
 @app.route('/newUser', methods = ['GET','POST'])
 def newUser():
