@@ -42,7 +42,7 @@ def login():
 			flash('Missing Arguments')
 			return redirect(url_for('url'))
 		if verify_password(email,password):
-			customer = session.query(User).filter_by(email=email).one()
+			user = session.query(User).filter_by(email=email).one()
 			flash('Login Successful, welcome %s' % user.name)
 			login_session['name'] = user.name
 			login_session['email'] = user.email
@@ -57,7 +57,7 @@ def aboutUs():
 #@app.route('/user/<string:name>')
 #def profile():
 #	return render_template('profile.html')
-@app.route('/Lookette/hello')
+@app.route('/Lookette/Welcome')
 def firstt():
 	return render_template('first.html')
 @app.route('/newUser', methods = ['GET','POST'])
@@ -75,14 +75,13 @@ def newUser():
             return redirect(url_for('newUser'))
         if session.query(User).filter_by(email = email).first() is not None:
             flash("A user with this email address already exists")
-            return redirect(url_for('newUser'))
         user = User(name = name, email=email, gender=gender, date_of_birth=date_of_birth)
         user.hash_password(password)
         session.add(user)
         
         session.commit()
         flash("User Created Successfully!")
-        return redirect(url_for('newUser')) #take me to main page
+        return redirect(url_for('firstt')) #take me to main page
     else:
 
         return render_template('newUser.html')
