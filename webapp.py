@@ -47,7 +47,7 @@ def login():
 			login_session['name'] = user.name
 			login_session['email'] = user.email
 			login_session['id'] = user.id
-			return redirect(url_for('login')) #take me to main page
+			return redirect(url_for('firstt')) #take me to main page
 		else:
 			flash('Incorrect username/email combination')
 			return redirect(url_for('login'))
@@ -57,7 +57,9 @@ def aboutUs():
 #@app.route('/user/<string:name>')
 #def profile():
 #	return render_template('profile.html')
-
+@app.route('/Lookette/hello')
+def firstt():
+	return render_template('first.html')
 @app.route('/newUser', methods = ['GET','POST'])
 def newUser():
     if request.method == 'POST':
@@ -82,7 +84,7 @@ def newUser():
         flash("User Created Successfully!")
         return redirect(url_for('newUser')) #take me to main page
     else:
-    	
+
         return render_template('newUser.html')
 
 @app.route("/product/<int:product_id>")
