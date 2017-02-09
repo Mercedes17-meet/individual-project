@@ -60,6 +60,14 @@ def aboutUs():
 @app.route('/Lookette/Welcome')
 def firstt():
 	return render_template('first.html')
+@app.route('/Lookette/Create')
+def create():
+	return render_template('create.html')
+@app.route('/Lookette/Explore')
+def explore():
+	return render_template('explore.html')
+	
+	
 @app.route('/newUser', methods = ['GET','POST'])
 def newUser():
     if request.method == 'POST':
