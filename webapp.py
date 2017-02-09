@@ -51,6 +51,7 @@ def login():
 		else:
 			flash('Incorrect username/email combination')
 			return redirect(url_for('login'))
+			
 @app.route('/aboutUs')
 def aboutUs():
 	return render_template('aboutUs.html')
