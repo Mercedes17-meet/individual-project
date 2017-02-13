@@ -94,5 +94,27 @@ and is wrapped around the whole page content, except for the footer in this exam
       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
+
+    {% if outfit==[]%}
+<p> There are currently no outfits in the catalog. </p>
+
+{% else %}
+<div class="product container-fluid">
+  <table>
+    <tr>
+      <td>Name</td><td>Price</td><td></td><td></td><td>Picture</td>
+    </tr>
+  {% for outfit in outfits %}
+  
+    <tr>
+      <td>{{outfit.name}}</td><td>{{outfit.description}}</td><td><img src={{outfit.photo}} height="300" ></td>
+    </tr>
+  
+    
+    {% endfor %}
+    </table>
+</div>
+
+{% endif %}
 </div>
   

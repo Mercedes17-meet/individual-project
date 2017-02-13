@@ -7,16 +7,15 @@ import os
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 
-UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-
-
+UPLOAD_FOLDER = '/path/to/the/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 app.secret_key = "MY_SUPER_SECRET_KEY"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 engine = create_engine('sqlite:///fizzBuzz.db')
 Base.metadata.bind = engine 
+Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine, autoflush=False)
 session = DBSession()
 
@@ -29,45 +28,37 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
-@app.route('/create', methods = ['GET','POST'])
-def newOutfit():
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
     if request.method == 'POST':
-        name = request.form['name']
-        description = request.form['description']
-        category = request.form['category']
-       
-        if name is None or category is None or 'file' not in request.files:
-            flash("Your form is missing arguments")
-            return redirect(url_for('newOutfit'))
-        file = request.files['file']
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['fileToUpload']
+        # if user does not select file, browser also
+        # submit a empty part without filename
         if file.filename == '':
             flash('No selected file')
-            return redirect(url_for('newOutfit'))
-        
+            return redirect(request.url)
         if file and allowed_file(file.filename):
-            outfit = Outfit(name = name, description=description, category = category)
-       
-            session.add(outfit)
-            session.commit()
-            filename = str(outfit.id) + "_" + secure_filename(file.filename)
+            filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            outfit.set_photo(filename)
-            session.add(outfit)
-            
-            session.commit()
-            
-            return redirect(url_for('explore'))
-        else:
-        	flash("Please upload either a .jpg, .jpeg, .png, or .gif file.")
-        	return redirect(url_for('newOutfit'))
-    else:
-        return render_template('newCustomer.html')
-    return render_template('create.html')
-
+            return redirect(url_for('uploaded_file',
+                                    filename=filename))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+         <input type=submit value=Upload>
+    </form>
+    '''
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 '''
 @app.route('/inventory')
 def inventory():
@@ -115,8 +106,7 @@ def create():
 	return render_template('create.html')
 @app.route('/Lookette/Explore')
 def explore():
-	outfits = session.query(Outfit).all()
-	return render_template('explore.html', outfits=outfits )
+	return render_template('explore.html')
 	
 	
 @app.route('/newUser', methods = ['GET','POST'])

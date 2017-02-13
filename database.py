@@ -4,6 +4,8 @@ from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine, func
 from passlib.apps import custom_app_context as pwd_context
 Base = declarative_base()
+
+
 class User(Base):
     __tablename__ = 'user'
     __table_args__ = {'extend_existing': True}  #This will enable us to add more columns later
@@ -24,13 +26,12 @@ class User(Base):
 
 class Outfit(Base):
     __tablename__ = 'outfit'
-    __table_args__ = {'extend_existing': True} 
     id = Column(Integer, primary_key=True)
     name = Column(String)
     season = Column(String)
     photo = Column(String)
     gender = Column(String)
-    categorty = Column(String)
+    category = Column(String)
     description = Column(String)
     creator_id = Column(Integer, ForeignKey('user.id'))
     creator =relationship("User", back_populates="my_outfits")
@@ -43,3 +44,8 @@ class Outfit_association(Base):
 	outfit_id=Column(Integer, ForeignKey("outfit.id"), primary_key=True)
 	user= relationship("User", back_populates="outfits")
 	outfit= relationship("Outfit", back_populates="owners")
+
+engine = create_engine('sqlite:///fizzBuzz.db')
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine, autoflush=False)
+session = DBSession()
