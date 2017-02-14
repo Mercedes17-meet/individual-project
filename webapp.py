@@ -33,11 +33,12 @@ def allowed_file(filename):
 @app.route('/create', methods = ['GET','POST'])
 def newOutfit():
     if request.method == 'POST':
-        name = request.form['name']
+        season = request.form['season']
         description = request.form['description']
         category = request.form['category']
+        gender = request.form['gender']
        
-        if name is None or category is None or 'file' not in request.files:
+        if season is None or category is None or 'file' not in request.files:
             flash("Your form is missing arguments")
             return redirect(url_for('newOutfit'))
         file = request.files['file']
@@ -62,8 +63,7 @@ def newOutfit():
         	flash("Please upload either a .jpg, .jpeg, .png, or .gif file.")
         	return redirect(url_for('newOutfit'))
     else:
-        return render_template('newCustomer.html')
-    return render_template('create.html')
+        return render_template('create.html')
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -117,7 +117,17 @@ def create():
 def explore():
 	outfits = session.query(Outfit).all()
 	return render_template('explore.html', outfits=outfits )
-	
+
+def categories():
+    winter_outfits=session.query.filter_by(season=Winter).all
+    summer_outfits=session.query.filter_by(season=Summer).all
+    spring_outfits=session.query.filter_by(season=Spring).all
+    fall_outfits=session.query.filter_by(season=Fall).all
+    casual_outfits=session.query.filter_by(category=Casual).all
+    formal_outfits=session.query.filter_by(category=Formal).all
+    party_outfits=session.query.filter_by(category=Party).all
+    sporty_outfits=session.query.filter_by(category=Sporty).all
+    return render_template('filter.html', winter_outfits=winter_outfits, summer_outfits=summer_outfits, fall_outfits=fall_outfits,spring_outfits=spring_outfits, casual_outfits=casual_outfits, formal_outfits=formal_outfits, party_outfits=party_outfits, sporty_outfits=sporty_outfits)
 	
 @app.route('/newUser', methods = ['GET','POST'])
 def newUser():

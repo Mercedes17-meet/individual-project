@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
+.div_1{
+  float: left;
+}
 
 h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
 body {font-family:'Josefin Sans', sans-serif;;
@@ -23,8 +26,8 @@ opacity: 0.8}
 w3-navbar{opacity: 0.7;
 }
 form{border: 3px solid #f1f1f1;
-background-color: white;
-background: rgba(255,255,255,0.8)}
+background: rgba(255,255,255,0.8)
+}
 </style>
 <body class="w3-light-grey">
 
@@ -46,12 +49,49 @@ and is wrapped around the whole page content, except for the footer in this exam
 
   </header>
   <div align="center">
-
-<form action="upload.php" method="post" enctype="multipart/form-data">
+<br><br>
+<form action="{{url_for('newOutfit')}}" method="post" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Upload Image" name="submit">
-</form>
+  <div class="container">
+    <div class="row"> 
+      <div class = "div_1 col-sm-5">
+        <h6>Description:</h6>
+        <input type="text" name="description">
+      </div>
+      <div class = " col-sm-4 ">
+        <h6>Choose season of the year:</h6>
+        <input type="radio" name="season" value="summer"> Summer<br>
+        <input type="radio" name="season" value="winter"> Winter<br>
+        <input type="radio" name="season" value="fall"> Fall<br>
+        <input type="radio" name="season" value="spring"> Spring<br>
+      </div>
+    </div>
+</div>
+    <div class="row">
+      <div class = "div_1 col-sm-5">
+        <h6>Choose gender:</h6>
+        <input type="radio" name="gender" value="male"> Male<br>
+        <input type="radio" name="gender" value="female"> Female<br>
+        <input type="radio" name="gender" value="unisex"> Unisex<br>
+      </div>
+      <div class = " col-sm-4">
+        <h6>Choose category:</h6>
+        <input type="radio" name="category" value="casual"> Casual<br>
+        <input type="radio" name="category" value="sporty"> Sporty<br>
+        <input type="radio" name="category" value="party"> Party<br>
+        <input type="radio" name="category" value="formal"> Formal<br>
+      </div>
+    </div>
+     </form> 
+  </div>
 
- </div>
-        </div>
+
+
+      
+
+
+
+</body>
+</html>

@@ -36,7 +36,8 @@ class Outfit(Base):
     creator_id = Column(Integer, ForeignKey('user.id'))
     creator =relationship("User", back_populates="my_outfits")
     owners= relationship("Outfit_association", back_populates="outfit")
-
+    def set_photo(self, photo):
+        self.photo = photo
 class Outfit_association(Base):
 	__tablename__='outfit_association'
 	__table_args__={'extend_existing': True}
@@ -44,8 +45,9 @@ class Outfit_association(Base):
 	outfit_id=Column(Integer, ForeignKey("outfit.id"), primary_key=True)
 	user= relationship("User", back_populates="outfits")
 	outfit= relationship("Outfit", back_populates="owners")
+ 
 
 engine = create_engine('sqlite:///fizzBuzz.db')
-Base.metadata.bind = engine
+Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine, autoflush=False)
 session = DBSession()
