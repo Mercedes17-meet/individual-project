@@ -189,7 +189,7 @@ def checkout():
 def confirmation(confirmation):
 	return "To be implemented"
 
-@app.route('/logout', methods = ['POST'])
+@app.route("/", methods = ['POST'])
 def logout():
     del(login_session['id'])
     return render_template("login.html")
