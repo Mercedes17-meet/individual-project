@@ -7,7 +7,7 @@ import os
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'static'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
@@ -33,12 +33,13 @@ def allowed_file(filename):
 @app.route('/create', methods = ['GET','POST'])
 def newOutfit():
     if request.method == 'POST':
-        season = request.form['season']
+        
         description = request.form['description']
         category = request.form['category']
         gender = request.form['gender']
+        name = request.form['name']
        
-        if season is None or category is None or 'file' not in request.files:
+        if category is None or 'file' not in request.files:
             flash("Your form is missing arguments")
             return redirect(url_for('newOutfit'))
         file = request.files['file']
@@ -47,7 +48,7 @@ def newOutfit():
             return redirect(url_for('newOutfit'))
         
         if file and allowed_file(file.filename):
-            outfit = Outfit(name = name, description=description, category = category)
+            outfit = Outfit(name=name, description=description, category = category, gender=gender)
        
             session.add(outfit)
             session.commit()
@@ -84,7 +85,8 @@ def inventory():
 def login():
 	if request.method == 'GET':
 		return render_template('login.html')
-	elif request.method == 'POST':
+        outfits=session.query(Outfit).all()
+	if request.method == 'POST':
 		email = request.form['email']
 		password = request.form['password']
 		if email is None or password is None:
@@ -99,8 +101,10 @@ def login():
 			return redirect(url_for('firstt')) #take me to main page
 		else:
 			flash('Incorrect username/email combination')
-			return redirect(url_for('login'))
-			
+    		return redirect(url_for('login'))
+        login_session['id']=user.id ##other than that the input matches the details
+        return render_template('first.html',user=user,outfits=outfits)
+
 @app.route('/aboutUs')
 def aboutUs():
 	return render_template('aboutUs.html')
@@ -117,17 +121,19 @@ def create():
 def explore():
 	outfits = session.query(Outfit).all()
 	return render_template('explore.html', outfits=outfits )
+def winter_outfits():
+    return render_template('winter_outfits.html')
 
 def categories():
-    winter_outfits=session.query.filter_by(season=Winter).all
-    summer_outfits=session.query.filter_by(season=Summer).all
-    spring_outfits=session.query.filter_by(season=Spring).all
-    fall_outfits=session.query.filter_by(season=Fall).all
+    winter_outfits=session.query.filter_by(category=Winter).all
+    summer_outfits=session.query.filter_by(category=Summer).all
+    spring_outfits=session.query.filter_by(category=Spring).all
+    fall_outfits=session.query.filter_by(category=Fall).all
     casual_outfits=session.query.filter_by(category=Casual).all
     formal_outfits=session.query.filter_by(category=Formal).all
     party_outfits=session.query.filter_by(category=Party).all
     sporty_outfits=session.query.filter_by(category=Sporty).all
-    return render_template('filter.html', winter_outfits=winter_outfits, summer_outfits=summer_outfits, fall_outfits=fall_outfits,spring_outfits=spring_outfits, casual_outfits=casual_outfits, formal_outfits=formal_outfits, party_outfits=party_outfits, sporty_outfits=sporty_outfits)
+    return render_template('first.html' 'winter_outfits.html', winter_outfits=winter_outfits, summer_outfits=summer_outfits, fall_outfits=fall_outfits,spring_outfits=spring_outfits, casual_outfits=casual_outfits, formal_outfits=formal_outfits, party_outfits=party_outfits, sporty_outfits=sporty_outfits)
 	
 @app.route('/newUser', methods = ['GET','POST'])
 def newUser():
@@ -185,7 +191,8 @@ def confirmation(confirmation):
 
 @app.route('/logout', methods = ['POST'])
 def logout():
-	return "To be implmented"
+    del(login_session['id'])
+    return render_template("login.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

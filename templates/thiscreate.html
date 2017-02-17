@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>LOOKETTE</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">-->
+<link rel="stylesheet" href = {{url_for('static', filename='w3.css')}}>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+.div_1{
+  float: left;
+}
+
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+body {font-family:'Josefin Sans', sans-serif;;
+background-image: url('/static/roses.jpg'); 
+background-size: cover;
+opacity: 1.0}
+header {font-family:'Josefin Sans', sans-serif;;
+background-size: cover;
+opacity: 0.8}
+w3-navbar{opacity: 0.7;
+}
+form{border: 3px solid #f1f1f1;
+background: rgba(255,255,255,0.8)
+}
+</style>
+<body class="w3-light-grey">
+
+<!-- Navigation bar with social media icons -->
+<ul class="w3-navbar w3-black w3-collapse" style="opacity:0.8;">
+<li>  <a href="{{url_for('firstt')}}"><h6  class="main-nav-item" >MAIN PAGE</h6></a>    </li>
+<li><a href="{{url_for('aboutUs')}}"><h6  class="main-nav-item"">ABOUT US</h6></a></li>
+<li><a href="{{url_for('explore')}}"><h6  class="main-nav-item"">EXPLORE</h6></a></li>
+<li style="float:right;"><form action="{{ url_for('logout') }}" method = 'post' enctype=multipart/form-data ><input  style= "font-size: 16px; width: 6em;  height: 4em;"" type="submit" value="Logout" ></li>
+</ul>
+  
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1600px">
+
+  <!-- Header -->
+  <header class="w3-container w3-center w3-padding-40 w3-white">
+    <h1 class="w3-xxxlarge"><b>SHARE YOUR OUTFIT</b></h1>
+    <h6> <span class="w3-tag">BE THE INSPIRATION </span> </h6>
+
+  </header>
+  <div align="center">
+<br><br>
+<form action="{{url_for('newOutfit')}}" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+  <div class="container">
+    <div class="row"> 
+      <div class = "div_1 col-sm-5">
+        <h6>Description:</h6>
+        <input type="text" name="description">
+      </div>
+      <div class = " col-sm-4 ">
+        <h6>Choose season of the year:</h6>
+        <input type="radio" name="season" value="summer"> Summer<br>
+        <input type="radio" name="season" value="winter"> Winter<br>
+        <input type="radio" name="season" value="fall"> Fall<br>
+        <input type="radio" name="season" value="spring"> Spring<br>
+      </div>
+    </div>
+</div>
+    <div class="row">
+      <div class = "div_1 col-sm-5">
+        <h6>Choose gender:</h6>
+        <input type="radio" name="gender" value="male"> Male<br>
+        <input type="radio" name="gender" value="female"> Female<br>
+        <input type="radio" name="gender" value="unisex"> Unisex<br>
+      </div>
+      <div class = " col-sm-4">
+        <h6>Choose category:</h6>
+        <input type="radio" name="category" value="casual"> Casual<br>
+        <input type="radio" name="category" value="sporty"> Sporty<br>
+        <input type="radio" name="category" value="party"> Party<br>
+        <input type="radio" name="category" value="formal"> Formal<br>
+      </div>
+    </div>
+     </form> 
+  </div>
+
+
+
+      
+
+
+
+</body>
+</html>

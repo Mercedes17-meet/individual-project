@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href = {{url_for('static', filename='w3.css')}}>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -30,18 +30,17 @@ header{
       width: 100%; /* Set width to 100% */
       margin: auto;
       min-height:200px;
-      border-radius: 50%;"
   }
 
 </style>
 <body>
 
 <!-- Navigation bar with social media icons -->
-<ul class="w3-navbar w3-black w3-collapse ">
-<li>  <a href="{{url_for('firstt')}}"><h6  class="main-nav-item" >MAIN PAGE</h6></a>    </li>
+<ul class="w3-navbar w3-black w3-collapse" style="opacity:0.8;">
+
+<li>  <a href="{{url_for('login')}}"><h6  class="main-nav-item" >MAIN PAGE</h6></a>    </li>
 <li><a href="{{url_for('aboutUs')}}"><h6  class="main-nav-item" >ABOUT US</h6></a></li>
 <li style="float:right;"><form action="{{ url_for('logout') }}" method = 'post' enctype=multipart/form-data ><input  style= "font-size: 16px; width: 6em;  height: 4em;"" type="submit" value="Logout" ></li>
-
 </ul>
 <!-- w3-content defines a container for fixed size centered content, 
 and is wrapped around the whole page content, except for the footer in this example -->
@@ -65,51 +64,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <body>
 
 
-
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <a href="{{url_for('create')}}"><img  src="{{url_for('static', filename='outfit1.jpg')}}" style="width:400px"  alt="Image" ></a>
-        <div class="carousel-caption" style=" position: absolute;bottom: 80%;">
-          
-          
-        </div>      
-      </div>
-      <div class="item">
-      <a href="{{url_for('explore')}}"><img  src="{{url_for('static', filename='outfit5.jpg')}}" style="width:400px"  alt="Image" ></a>
-        <div class="carousel-caption" style=" position: absolute;bottom: 80%;">
-          
-          
-        </div>      
-      </div>
-      {% for outfit in outfits %}
-      <div class="item ">
-        <a href="{{url_for('create')}}"><img  src="{{url_for('static', filename=outfit.photo)}}" style="width:400px"  alt="Image" ></a>
-        <div class="carousel-caption" style=" position: absolute;bottom: 80%;">
-          
-          
-           
-      </div>
-    </div>
-    {% endfor %}
-</div>
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-<br><br>
+  
     {% if outfit==[]%}
 <p> There are currently no outfits in the catalog. </p>
 
@@ -118,13 +73,13 @@ and is wrapped around the whole page content, except for the footer in this exam
 <div class="container">
 
         <div class="row">
-          {% for outfit in outfits %}
+          {% for outfit in winter_outfits %}
         
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                 <a class="thumbnail" >
                      <td>{{outfit.name}}</td><br><td>{{outfit.description}}</td><br><td>{{outfit.owner}}</td>
-                    <img class="img-responsive" src="{{url_for('static', filename=outfit.photo)}}" style="height:250px">
+                    <img class="img-responsive" src="{{outfit.photo}}" style="height:250px">
                 </a>
             </div>
           {% endfor %}

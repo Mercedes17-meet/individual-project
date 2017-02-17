@@ -36,8 +36,9 @@ header{
 
 <!-- Navigation bar with social media icons -->
 <ul class="w3-navbar w3-black w3-hide-small ">
-<li>  <a href="{{url_for('login')}}"><h6  class="main-nav-item" >MAIN PAGE</h6></a>    </li>
+<li>  <a href="{{url_for('firstt')}}"><h6  class="main-nav-item" >MAIN PAGE</h6></a>    </li>
 <li><a href="{{url_for('aboutUs')}}"><h6  class="main-nav-item" >ABOUT US</h6></a></li>
+<li style="float:right;"><form action="{{ url_for('logout') }}" method = 'post' enctype=multipart/form-data ><input  style= "font-size: 16px; width: 6em;  height: 4em;"" type="submit" value="Logout" ></li>
 
 </ul>
 <!-- w3-content defines a container for fixed size centered content, 

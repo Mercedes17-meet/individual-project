@@ -28,7 +28,7 @@ class Outfit(Base):
     __tablename__ = 'outfit'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    season = Column(String)
+    
     photo = Column(String)
     gender = Column(String)
     category = Column(String)
