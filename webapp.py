@@ -99,11 +99,12 @@ def login():
 			login_session['email'] = user.email
 			login_session['id'] = user.id
 			return redirect(url_for('firstt')) #take me to main page
-		else:
-			flash('Incorrect username/email combination')
-    		return redirect(url_for('login'))
-        login_session['id']=user.id ##other than that the input matches the details
-        return render_template('first.html',user=user,outfits=outfits)
+        else:
+            flash('Incorrect username/email combination')
+            return redirect(url_for('login'))
+         ##other than that the input matches the details
+            return render_template('first.html',user=user,outfits=outfits)
+
 
 @app.route('/aboutUs')
 def aboutUs():
@@ -180,6 +181,7 @@ def newUser():
             return redirect(url_for('newUser'))
         if session.query(User).filter_by(email = email).first() is not None:
             flash("A user with this email address already exists")
+            return redirect('newUser')
         user = User(name = name, email=email, gender=gender, date_of_birth=date_of_birth)
         user.hash_password(password)
         session.add(user)
