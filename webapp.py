@@ -181,7 +181,7 @@ def newUser():
             return redirect(url_for('newUser'))
         if session.query(User).filter_by(email = email).first() is not None:
             flash("A user with this email address already exists")
-            return redirect('newUser')
+            return redirect(url_for('newUser'))
         user = User(name = name, email=email, gender=gender, date_of_birth=date_of_birth)
         user.hash_password(password)
         session.add(user)
