@@ -26,7 +26,7 @@ form{border:solid #f1f1f1;
 background-color: white;
 background: rgba(255,255,255,0.8);
 font-size: 20px;}
-
+div.columns div   { width: 300px; float:left; }
 </style>
 <body>
 
@@ -54,17 +54,15 @@ and is wrapped around the whole page content, except for the footer in this exam
   Select image to upload:
     <input type="file" name="file" id="fileToUpload">
     <input type="submit" value="Upload Image" name="submit"><br>
-  <div class="container">
+  <div class="colums" style="{ width: 900px; }">
   
-    <div class="col-sd-3" style="float: left; overflow: hidden;">
+    <div>
       <h6>Name:</h6>
       <input type="text" name="name">
       <h6>Description:</h6>
       <input type="text" name="description">
     </div>
-    <div class="col-sd-3" style="margin-left: 400px;
-    
-    overflow: hidden;">
+    <div>
      <h6>Choose category:</h6>
         <input type="radio" name="category" value="summer"> Summer<br>
         <input type="radio" name="category" value="winter"> Winter<br>
@@ -75,7 +73,7 @@ and is wrapped around the whole page content, except for the footer in this exam
         <input type="radio" name="category" value="party"> Party<br>
         <input type="radio" name="category" value="formal"> Formal<br>
     </div>
-    <div class="col-sd-3" style="align-content: right;overflow: hidden;">
+    <div>
         <h6>Choose gender:</h6>
         <input type="radio" name="gender" value="male"> Male<br>
         <input type="radio" name="gender" value="female"> Female<br>

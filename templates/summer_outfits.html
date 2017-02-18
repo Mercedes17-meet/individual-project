@@ -1,58 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>LOOKETTE</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>W3.CSS Template</title>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href = {{url_for('static', filename='w3.css')}}>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
 <style>
+
 h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
 body {font-family:'Josefin Sans', sans-serif;
 background-image: url('/static/roses.jpg'); 
 background-size: cover;
 opacity: 1}
+.thumbnail{
 
-
+}
 ul{ opacity: 0.8; }
 header{
   font-family:'Josefin Sans', sans-serif;
   background-size: cover;
   opacity: 0.8;
 }
+ .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+      border-radius: 50%;"
+  }
 
 </style>
-<body class="w3-light-grey">
+<body>
 
 <!-- Navigation bar with social media icons -->
-<ul class="w3-navbar w3-black w3-collapse" style="opacity:0.8;">
-
-<li><a href="{{url_for('aboutUs')}}"><h6  class="main-nav-item"">ABOUT US</h6></a></li>
+<ul class="w3-navbar w3-black w3-collapse ">
+<li>  <a href="{{url_for('firstt')}}"><h6  class="main-nav-item" >MAIN PAGE</h6></a>    </li>
+<li><a href="{{url_for('aboutUs')}}"><h6  class="main-nav-item" >ABOUT US</h6></a></li>
 <li style="float:right;"><form action="{{ url_for('logout') }}" method = 'post' enctype=multipart/form-data ><input  style= "font-size: 16px; width: 6em;  height: 4em;"" type="submit" value="Logout" ></li>
+
 </ul>
-  
 <!-- w3-content defines a container for fixed size centered content, 
 and is wrapped around the whole page content, except for the footer in this example -->
+
+
 <div class="w3-content" style="max-width:1600px">
 
   <!-- Header -->
   <header class="w3-container w3-center w3-padding-40 w3-white">
     <h1 class="w3-xxxlarge"><b>LOOKETTE</b></h1>
-    <h6> <span class="w3-tag">SUMMER OUTFITS</span> </h6>
+    <h6> <span class="w3-tag"> SUMMER OUTFITS</span> </h6>
 
   </header>
+<head>
+  <title>Welcome</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <br><br><br>
-      <div class="container">
+</head>
+
+
+<br><br>
+
+    {% if outfit==[] %}
+<p> There are currently no outfits in the catalog. </p>
+
+{% else %}
+
+<div class="container">
 
         <div class="row">
           {% for outfit in summer_outfits %}
         
+
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                 <a class="thumbnail" >
                      <td>{{outfit.name}}</td><br><td>{{outfit.description}}</td><br><td>{{outfit.owner}}</td>
@@ -60,16 +86,15 @@ and is wrapped around the whole page content, except for the footer in this exam
                 </a>
             </div>
           {% endfor %}
-        </div>
-         
-
-
             
         </div>
-      </div>
- 
 
-</body>
-</html>
+{% endif %}
 
+  
 
+</div>
+</div>
+
+</div>
+</body></html>
