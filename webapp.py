@@ -38,7 +38,7 @@ def newOutfit():
         category = request.form['category']
         gender = request.form['gender']
         name = request.form['name']
-       
+        owner= login_session['name']
         if category is None or 'file' not in request.files:
             flash("Your form is missing arguments")
             return redirect(url_for('newOutfit'))
@@ -121,10 +121,40 @@ def create():
 def explore():
 	outfits = session.query(Outfit).all()
 	return render_template('explore.html', outfits=outfits )
+@app.route('/Lookette/winter_outfits')
 def winter_outfits():
-    return render_template('winter_outfits.html')
+    winter_outfits=session.query(Outfit).filter_by(category='winter').all()
+    return render_template('winter_outfits.html', winter_outfits=winter_outfits)
+@app.route('/Lookette/summer_outfits')
+def summer_outfits():
+    summer_outfits=session.query(Outfit).filter_by(category='summer').all()
+    return render_template('summer_outfits.html', summer_outfits=summer_outfits)
+@app.route('/Lookette/spring_outfits')
+def spring_outfits():
+    spring_outfits=session.query(Outfit).filter_by(category='spring').all()
+    return render_template('spring_outfits.html', spring_outfits=spring_outfits)
+@app.route('/Lookette/fall_outfits')
+def fall_outfits():
+    fall_outfits=session.query(Outfit).filter_by(category='fall').all()
+    return render_template('fall_outfits.html', fall_outfits=fall_outfits)
+@app.route('/Lookette/casual_outfits')
+def casual_outfits():
+    casual_outfits=session.query(Outfit).filter_by(category='casual').all()
+    return render_template('casual_outfits.html', casual_outfits=casual_outfits)
+@app.route('/Lookette/sporty_outfits')
+def sporty_outfits():
+    sporty_outfits=session.query(Outfit).filter_by(category='sporty').all()
+    return render_template('sporty_outfits.html', sporty_outfits=sporty_outfits)
+@app.route('/Lookette/party_outfits')
+def party_outfits():
+    party_outfits=session.query(Outfit).filter_by(category='party').all()
+    return render_template('party_outfits.html', party_outfits=party_outfits)
+@app.route('/Lookette/formal_outfits')
+def formal_outfits():
+    formal_outfits=session.query(Outfit).filter_by(category='formal').all()
+    return render_template('formal_outfits.html', formal_outfits=formal_outfits)
+'''def categories():
 
-def categories():
     winter_outfits=session.query.filter_by(category=Winter).all
     summer_outfits=session.query.filter_by(category=Summer).all
     spring_outfits=session.query.filter_by(category=Spring).all
@@ -134,7 +164,7 @@ def categories():
     party_outfits=session.query.filter_by(category=Party).all
     sporty_outfits=session.query.filter_by(category=Sporty).all
     return render_template('first.html' 'winter_outfits.html', winter_outfits=winter_outfits, summer_outfits=summer_outfits, fall_outfits=fall_outfits,spring_outfits=spring_outfits, casual_outfits=casual_outfits, formal_outfits=formal_outfits, party_outfits=party_outfits, sporty_outfits=sporty_outfits)
-	
+	'''
 @app.route('/newUser', methods = ['GET','POST'])
 def newUser():
     if request.method == 'POST':
@@ -156,10 +186,12 @@ def newUser():
         
         session.commit()
         flash("User Created Successfully!")
-        return redirect(url_for('firstt')) #take me to main page
+        return redirect(url_for('login')) #take me to main page
     else:
 
         return render_template('newUser.html')
+
+@app.route('/update',methods=['GET','POST'])
 
 @app.route("/product/<int:product_id>")
 def product(product_id):
@@ -189,7 +221,7 @@ def checkout():
 def confirmation(confirmation):
 	return "To be implemented"
 
-@app.route("/", methods = ['POST'])
+@app.route("/logout", methods = ['POST'])
 def logout():
     del(login_session['id'])
     return render_template("login.html")

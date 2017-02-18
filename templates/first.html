@@ -15,16 +15,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 
-h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald";}
 body {font-family:'Josefin Sans', sans-serif;
 background-image: url('/static/roses.jpg'); 
 background-size: cover;
-opacity: 1}
+opacity: 1;}
 ul{ opacity: 0.8; }
 header{
   font-family:'Josefin Sans', sans-serif;
   background-size: cover;
   opacity: 0.8;
+}
+w3-navbar{opacity: 0.7;
 }
 .dropbtn {
     background-color: black;
@@ -76,10 +78,11 @@ header{
 
 <ul class="w3-navbar w3-black w3-collapse" style="opacity:0.8;">
 
-<li>  <a href="{{url_for('login')}}"><h6  class="main-nav-item" >MAIN PAGE</h6></a>    </li>
+
 
 
 <li><a href="{{url_for('aboutUs')}}"><h6  class="main-nav-item"">ABOUT US</h6></a></li>
+
 <li style="float:right;"><form action="{{ url_for('logout') }}" method = 'post' enctype=multipart/form-data ><input  style= "font-size: 16px; width: 6em;  height: 4em;"" type="submit" value="Logout" ></li>
 
 </ul>
@@ -120,13 +123,14 @@ and is wrapped around the whole page content, except for the footer in this exam
      <div class="dropdown" >
   <button class="dropbtn">OUTFITS'CATEGORIES</button>
   <div class="dropdown-content">
-    <a href="{{url_for('create')}}">Casual</a>
-    <a href="{{url_for('create')}}">Sporty</a>
-    <a href="{{url_for('create')}}">Fancy</a>
-    <a href="{{url_for('create')}}">Spring</a>
-    <a href="{{url_for('create')}}">Winter</a>
-    <a href="{{url_for('create')}}">Summer</a>
-    <a href="{{url_for('create')}}">Fall</a>
+    <a href="{{url_for('casual_outfits')}}">Casual</a>
+    <a href="{{url_for('sporty_outfits')}}">Sporty</a>
+    <a href="{{url_for('formal_outfits')}}">Formal</a>
+    <a href="{{url_for('spring_outfits')}}">Spring</a>
+    <a href="{{url_for('winter_outfits')}}">Winter</a>
+    <a href="{{url_for('summer_outfits')}}">Summer</a>
+    <a href="{{url_for('fall_outfits')}}">Fall</a>
+    <a href="{{url_for('party_outfits')}}">Party</a>
     
   </div>
 </div>
